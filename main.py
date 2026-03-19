@@ -1,8 +1,4 @@
-opcion = 0
-inventario = []
-
-while opcion != 4:
-
+def mostrar_menu():
     print("""
     ----------bienvenido----------
         1. Agregar Producto
@@ -11,66 +7,86 @@ while opcion != 4:
         4. Salir
     """)
 
-    try:
-        opcion = int(input("Que opcion deseas realizar: "))
-    except ValueError:
-        print("Error: Opcion no valida, ingrese un numero.")
-        continue
 
-    if opcion < 1 or opcion > 4:
-        print("Error: Debe ingresar una opcion entre 1 y 4")
-        continue
+def agregar_producto(inventario):
+    nombre_producto = ""
 
-    if opcion == 1:
+    while nombre_producto.lower() != "salir":
+        print("\n=========Agregar producto=========")
+        nombre_producto = input("Agregar el nombre del producto (escribe 'salir' para terminar): ")
 
-        nombre_producto = ""
-
-        while nombre_producto.lower() != "salir":
-
-            print("\n=========Agregar producto=========")
-            nombre_producto = input("Agregar el nombre del producto (escribe 'salir' para terminar): ")
-
-            if nombre_producto.lower() != "salir":
-
+        if nombre_producto.lower() != "salir":
+            try:
                 precio = float(input("Precio del producto: "))
                 cantidad = int(input("Cantidad de productos: "))
+            except ValueError:
+                print("Error: Debes ingresar valores numéricos válidos")
+                continue
 
-                producto = {
-                    "nombre del producto": nombre_producto,
-                    "precio": precio,
-                    "cantidad": cantidad
-                }
+            producto = {
+                "nombre del producto": nombre_producto,
+                "precio": precio,
+                "cantidad": cantidad
+            }
 
-                inventario.append(producto)
+            inventario.append(producto)
+            print("Producto agregado correctamente")
 
-                print("Producto agregado correctamente")
 
-    elif opcion == 2:
+def mostrar_inventario(inventario):
+    if not inventario:
+        print("\nEl inventario está vacío")
+    else:
+        print("\nInventario registrado:\n")
+        for i, producto in enumerate(inventario, start=1):
+            print(f"{i}. Producto: {producto['nombre del producto']} | Precio: {producto['precio']} | Cantidad: {producto['cantidad']}")
 
-        if not inventario:
-            print("\nEl inventario está vacío")
 
-        else:
-            print("\nInventario registrado:\n")
+def calcular_estadisticas(inventario):
+    if not inventario:
+        print("\nNo hay productos para calcular estadísticas")
+    else:
+        valor_total = 0
+        cantidad_total = 0
 
-            for i, producto in enumerate(inventario, start=1):
-                print(f"{i}. Producto: {producto['nombre del producto']} | Precio: {producto['precio']} | Cantidad: {producto['cantidad']}")
+        for producto in inventario:
+            valor_total += producto["precio"] * producto["cantidad"]
+            cantidad_total += producto["cantidad"]
 
-    elif opcion == 3:
+        print("\n===== Estadísticas =====")
+        print(f"Valor total del inventario: {valor_total}")
+        print(f"Cantidad total de productos: {cantidad_total}")
 
-        if not inventario:
-            print("\nNo hay productos para calcular estadísticas")
 
-        else:
-            valor_total = 0
-            cantidad_total = 0
+# Programa principal
+def main():
+    opcion = 0
+    inventario = []
 
-            for producto in inventario:
-                valor_total += producto["precio"] * producto["cantidad"]
-                cantidad_total += producto["cantidad"]
+    while opcion != 4:
+        mostrar_menu()
 
-            print("\n===== Estadísticas =====")
-            print(f"Valor total del inventario: {valor_total}")
-            print(f"Cantidad total de productos: {cantidad_total}")
+        try:
+            opcion = int(input("Que opcion deseas realizar: "))
+        except ValueError:
+            print("Error: Opcion no valida, ingrese un numero.")
+            continue
 
-print("\nPrograma finalizado")
+        if opcion < 1 or opcion > 4:
+            print("Error: Debe ingresar una opcion entre 1 y 4")
+            continue
+
+        if opcion == 1:
+            agregar_producto(inventario)
+
+        elif opcion == 2:
+            mostrar_inventario(inventario)
+
+        elif opcion == 3:
+            calcular_estadisticas(inventario)
+
+    print("\nPrograma finalizado")
+
+
+# Ejecutar programa
+main() 
