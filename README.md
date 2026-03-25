@@ -36,6 +36,39 @@ inventario/
 ├── archivos.py
 └── README.md
 
+
+## Menú del sistema
+
+El programa cuenta con las siguientes opciones:
+
+Agregar producto
+Mostrar inventario
+Buscar producto
+Actualizar producto
+Eliminar producto
+Ver estadísticas
+Guardar inventario en CSV
+Cargar inventario desde CSV
+Salir
+
+## Persistencia en CSV
+
+El sistema permite guardar el inventario en un archivo CSV con el siguiente formato:
+
+nombre,precio,cantidad
+arroz,2500,10
+leche,3000,5
+pan,800,20
+
+También permite cargar archivos CSV validando:
+
+Encabezado correcto
+Número de columnas
+Tipo de datos (float e int)
+Valores no negativos
+
+Las filas inválidas son omitidas y reportadas.
+
 ##  Estructura de datos
 
 Cada producto se representa como un diccionario:
