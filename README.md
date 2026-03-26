@@ -74,6 +74,8 @@ Fusión
 *Si no existe → lo agrega
 
 ---
+### Link al repositorio: [SystemInvertory](https://github.com/IsaacRG5/Registro_de_productos.git)
+El Codigo esta en feature/2-codigo
 
 ## ▶️ Ejecución
 
