@@ -31,34 +31,40 @@ def guardar_csv(inventario, ruta, incluir_header=True):
 
 
 # Carga inventario desde un archivo CSV
+import csv
+
+# Carga inventario desde un archivo CSV
 def cargar_csv(ruta):
 
     inventario = []
     errores = 0
 
     try:
-
         with open(ruta, newline="", encoding="utf-8") as archivo:
 
             reader = csv.reader(archivo)
 
-            # Leemos encabezado
-            header = next(reader)
+            # Intentamos leer el encabezado
+            try:
+                header = next(reader)
+            except StopIteration:
+                print("Error: El archivo está vacío o corrupto")
+                return []
 
             # Validamos encabezado
             if header != ["nombre", "precio", "cantidad"]:
-                print("Encabezado incorrecto")
+                print("Error: Encabezado incorrecto")
                 return []
 
             # Procesamos cada fila
             for fila in reader:
 
+                # Validamos estructura de la fila
                 if len(fila) != 3:
                     errores += 1
                     continue
 
                 try:
-
                     nombre = fila[0]
                     precio = float(fila[1])
                     cantidad = int(fila[2])
@@ -75,17 +81,24 @@ def cargar_csv(ruta):
                     })
 
                 except ValueError:
+                    # Si no se puede convertir a número
                     errores += 1
 
-        print("Productos cargados:", len(inventario))
-        print("Filas inválidas omitidas:", errores)
+        # Reporte final (MUY IMPORTANTE)
+        print("Productos cargados correctamente:", len(inventario))
+        print("Filas inválidas u omitidas:", errores)
 
         return inventario
 
     except FileNotFoundError:
-        print("Archivo no encontrado")
+        print("Error: Archivo no encontrado")
 
     except UnicodeDecodeError:
-        print("Error al leer archivo")
+        print("Error: El archivo tiene problemas de codificación")
 
+    except Exception as e:
+        # Captura cualquier error inesperado (archivo corrupto, etc.)
+        print("Error inesperado al cargar el archivo:", e)
+
+    # Nunca dejamos que el programa se rompa
     return []

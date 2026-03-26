@@ -44,6 +44,9 @@ def main():
             try:
                 precio = float(input("Precio: "))
                 cantidad = int(input("Cantidad: "))
+                if precio < 0 or cantidad < 0:
+                    print("El precio y la cantidad deben ser positivos")
+                    continue
             except ValueError:
                 print("Datos inválidos")
                 continue

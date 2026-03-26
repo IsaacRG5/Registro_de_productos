@@ -1,81 +1,85 @@
-# Sistema de Inventario
+# 📦 Sistema de Inventario en Python
+
+Aplicación de consola desarrollada en Python para gestionar un inventario de productos. Permite agregar, buscar, actualizar, eliminar productos, generar estadísticas y manejar archivos CSV de forma segura.
 
 ---
 
-##  Descripción
+## 🚀 Funcionalidades
 
-Este sistema permite gestionar un inventario de productos mediante operaciones CRUD (Crear, Leer, Actualizar y Eliminar).
-
-El programa está desarrollado en Python y permite:
-
-- Agregar, buscar, actualizar y eliminar productos
-- Visualizar el inventario
-- Calcular estadísticas del negocio
-- Guardar y cargar información usando archivos CSV
-
-El inventario se almacena en memoria utilizando listas y diccionarios, y se puede persistir en archivos para conservar los datos entre sesiones.
-
----
-
-##  Características
-
-- ✔ Operaciones CRUD completas
-- ✔ Uso de listas y diccionarios
-- ✔ Persistencia de datos en archivos CSV
-- ✔ Cálculo de estadísticas del inventario
-- ✔ Validación de datos y manejo de errores
-- ✔ Código modular organizado en varios archivos
+- Agregar productos al inventario  
+- Mostrar todos los productos  
+- Buscar productos por nombre  
+- Actualizar precio y cantidad  
+- Eliminar productos  
+- Generar estadísticas:
+  - Total de unidades
+  - Valor total del inventario
+  - Producto más caro
+  - Producto con mayor stock  
+- Guardar inventario en archivo CSV  
+- Cargar inventario desde CSV  
+- Sobrescribir o fusionar inventario  
+- Manejo de errores (datos inválidos, archivos corruptos, etc.)
 
 ---
 
-##  Estructura del proyecto
+## 🧠 Tecnologías utilizadas
+
+- Python 3  
+- Módulo `csv`  
+- Programación estructurada  
+- Manejo de excepciones (`try/except`)
+
+
+## Estructura del proyecto
 inventario/
 │
-├── app.py
-├── servicios.py
+├── main.py
+├── servicio.py
 ├── archivos.py
 └── README.md
 
+## Ejemplo de uso
+====== SISTEMA DE INVENTARIO ======
+1. Agregar producto
+2. Mostrar inventario
+3. Buscar producto
+4. Actualizar producto
+5. Eliminar producto
+6. Ver estadísticas
+7. Guardar inventario en CSV
+8. Cargar inventario desde CSV
+9. Salir
 
-## Menú del sistema
+## Manejo de errores
 
-El programa cuenta con las siguientes opciones:
+El sistema está diseñado para no fallar:
 
-Agregar producto
-Mostrar inventario
-Buscar producto
-Actualizar producto
-Eliminar producto
-Ver estadísticas
-Guardar inventario en CSV
-Cargar inventario desde CSV
-Salir
+Si ingresas datos incorrectos → muestra error
+Si el archivo no existe → muestra mensaje
+Si el CSV tiene errores → ignora filas inválidas
+El programa nunca se cierra inesperadamente
 
-## Persistencia en CSV
+## Manejo de archivos CSV
+Guardar
+*Guarda productos en formato .csv
+*Incluye encabezados automáticamente
+Cargar
+*Valida estructura del archivo
+*Ignora filas incorrectas
+*Muestra cuántos datos se cargaron correctamente
+*Reporta filas inválidas
+Fusión
+*Si el producto ya existe → suma la cantidad
+*Si no existe → lo agrega
 
-El sistema permite guardar el inventario en un archivo CSV con el siguiente formato:
+---
 
-nombre,precio,cantidad
-arroz,2500,10
-leche,3000,5
-pan,800,20
+## ▶️ Ejecución
 
-También permite cargar archivos CSV validando:
+1. Abre el proyecto en Visual Studio Code  
+2. Ejecuta el archivo:
 
-Encabezado correcto
-Número de columnas
-Tipo de datos (float e int)
-Valores no negativos
+```bash
+python main.py
 
-Las filas inválidas son omitidas y reportadas.
-
-##  Estructura de datos
-
-Cada producto se representa como un diccionario:
-
-```python
-{
-    "nombre": "producto",
-    "precio": 1000.0,
-    "cantidad": 5
-}
